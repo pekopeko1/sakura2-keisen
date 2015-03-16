@@ -97,11 +97,11 @@ Function GetCur()
 End Function
 
 Function GetTop
-	GetTopOrBottom("Top")
+	GetTop = GetTopOrBottom("Top")
 End Function
 
 Function GetBottom
-	GetTopOrBottom("Bottom")
+	GetBottom = GetTopOrBottom("Bottom")
 End Function
 
 Function GetTopOrBottom(direct)

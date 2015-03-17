@@ -20,10 +20,10 @@ linemode(1, 1, 1, 0) = "„²"
 linemode(1, 1, 1, 1) = "„´"
 
 Dim top_joint, bottom_joint, left_joint, right_joint
-top_joint    = Array("„«", "„´", "„¬", "„­", "„°", "„±", "„²")
-bottom_joint = Array("„«", "„´", "„®", "„¯", "„°", "„²", "„³")
-left_joint   = Array("„ª", "„´", "„¬", "„¯", "„°", "„±", "„³")
-right_joint  = Array("„ª", "„´", "„®", "„­", "„±", "„²", "„²")
+top_joint    = Array("„ ", "„©", "„¡", "„¢", "„¥", "„¦", "„§", "„«", "„´", "„¬", "„­", "„°", "„±", "„²")
+bottom_joint = Array("„ ", "„©", "„£", "„¤", "„¥", "„§", "„¨", "„«", "„´", "„®", "„¯", "„°", "„²", "„³")
+left_joint   = Array("„Ÿ", "„©", "„¡", "„¤", "„¥", "„¦", "„¨", "„ª", "„´", "„¬", "„¯", "„°", "„±", "„³")
+right_joint  = Array("„Ÿ", "„©", "„£", "„¢", "„¦", "„§", "„§", "„ª", "„´", "„®", "„­", "„±", "„²", "„²")
 
 Call DrawLine("Bottom")
 
@@ -184,7 +184,7 @@ Sub InsertText(ByVal c)
 	ismulti = False
 	
 	Dim isrep
-	If IsStrMatch(GetCur, Array(" ", "„ª", "„«", "„´", "„¬", "„­", "„®", "„¯", "„°", "„±", "„²", "„³")) = 1 Then
+	If IsStrMatch(GetCur, Array(" ", "„Ÿ", "„ ", "„©", "„¡", "„¢", "„£", "„¤", "„¥", "„¦", "„§", "„¨", "„ª", "„«", "„´", "„¬", "„­", "„®", "„¯", "„°", "„±", "„²", "„³")) = 1 Then
 		isrep = True
 	Else
 		isrep = False

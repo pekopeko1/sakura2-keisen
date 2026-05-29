@@ -40,28 +40,27 @@ def build():
         template = f.read()
 
     configs = [
-        ("bottom_line.vbs", "Bottom", "thin"),
-        ("bottom_line_b.vbs", "Bottom", "thick"),
-        ("left_line.vbs", "Left", "thin"),
-        ("left_line_b.vbs", "Left", "thick"),
-        ("right_line.vbs", "Right", "thin"),
-        ("right_line_b.vbs", "Right", "thick"),
-        ("top_line.vbs", "Top", "thin"),
-        ("top_line_b.vbs", "Top", "thick"),
+        ("../bottom_line.vbs", "Bottom", "thin"),
+        ("../bottom_line_b.vbs", "Bottom", "thick"),
+        ("../left_line.vbs", "Left", "thin"),
+        ("../left_line_b.vbs", "Left", "thick"),
+        ("../right_line.vbs", "Right", "thin"),
+        ("../right_line_b.vbs", "Right", "thick"),
+        ("../top_line.vbs", "Top", "thin"),
+        ("../top_line_b.vbs", "Top", "thick"),
     ]
 
     for filename, direction, style in configs:
-        linemode_code = generate_linemode_code(style)
-        defchar = get_defchar(direction, style)
-        
-        content = template.replace("{{LINEMODE_CODE}}", linemode_code)
-        content = content.replace("{{DIRECTION}}", f'"{direction}"')
-        content = content.replace("{{DEFCHAR}}", f'"{defchar}"')
-        
-        # 書き出しも明示的に Shift-JIS (cp932)
-        with open(filename, "w", encoding="cp932") as f:
-            f.write(content)
-        print(f"Generated {filename}")
+            linemode_code = generate_linemode_code(style)
+            defchar = get_defchar(direction, style)
+
+            content = template.replace("{{LINEMODE_CODE}}", linemode_code)
+            content = content.replace("{{DIRECTION}}", f'"{direction}"')
+            content = content.replace("{{DEFCHAR}}", f'"{defchar}"')
+
+            with open(filename, "w", encoding="cp932") as f:
+                f.write(content)
+            print(f"Generated {filename}")
 
 if __name__ == "__main__":
     build()

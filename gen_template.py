@@ -1,36 +1,21 @@
-' draw arrow
+import codecs
+template = """' draw arrow
 Option Explicit
 
-Dim linemode(1, 1, 1, 1)
-linemode(0, 0, 0, 0) = ""
-linemode(0, 0, 0, 1) = ""
-linemode(0, 0, 1, 0) = ""
-linemode(0, 0, 1, 1) = "„ª"
-linemode(0, 1, 0, 0) = ""
-linemode(0, 1, 0, 1) = "„¬"
-linemode(0, 1, 1, 0) = "„­"
-linemode(0, 1, 1, 1) = "„±"
-linemode(1, 0, 0, 0) = ""
-linemode(1, 0, 0, 1) = "„¯"
-linemode(1, 0, 1, 0) = "„®"
-linemode(1, 0, 1, 1) = "„³"
-linemode(1, 1, 0, 0) = "„«"
-linemode(1, 1, 0, 1) = "„°"
-linemode(1, 1, 1, 0) = "„²"
-linemode(1, 1, 1, 1) = "„´"
+{{LINEMODE_CODE}}
 
 Dim top_joint, bottom_joint, left_joint, right_joint
-top_joint    = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
-bottom_joint = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
-left_joint   = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
-right_joint  = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
+top_joint    = Array("â”€", "â”Œ", "â”", "â”¬", "â””", "â”˜", "â”´", "â”‚", "â”œ", "â”¤", "â”¼", "â”", "â”", "â”“", "â”³", "â”—", "â”›", "â”»", "â”ƒ", "â”£", "â”«", "â•‹")
+bottom_joint = Array("â”€", "â”Œ", "â”", "â”¬", "â””", "â”˜", "â”´", "â”‚", "â”œ", "â”¤", "â”¼", "â”", "â”", "â”“", "â”³", "â”—", "â”›", "â”»", "â”ƒ", "â”£", "â”«", "â•‹")
+left_joint   = Array("â”€", "â”Œ", "â”", "â”¬", "â””", "â”˜", "â”´", "â”‚", "â”œ", "â”¤", "â”¼", "â”", "â”", "â”“", "â”³", "â”—", "â”›", "â”»", "â”ƒ", "â”£", "â”«", "â•‹")
+right_joint  = Array("â”€", "â”Œ", "â”", "â”¬", "â””", "â”˜", "â”´", "â”‚", "â”œ", "â”¤", "â”¼", "â”", "â”", "â”“", "â”³", "â”—", "â”›", "â”»", "â”ƒ", "â”£", "â”«", "â•‹")
 
-Call DrawLine("Bottom")
+Call DrawLine({{DIRECTION}})
 
 Sub DrawLine(direct)
         Dim ln
         Dim defchar
-        defchar = "„«"
+        defchar = {{DEFCHAR}}
 
         Select Case direct
         Case "Bottom": ln = CStr(linemode(IsStrMatch(GetTop, top_joint), 1, IsStrMatch(GetLeft, left_joint), IsStrMatch(GetRight, right_joint)))
@@ -116,7 +101,7 @@ End Function
 Sub InsertText(ByVal c)
         If c = "" Then Exit Sub
         Dim isrep
-        If IsStrMatch(GetCur, Array(" ", "„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")) = 1 Then
+        If IsStrMatch(GetCur, Array(" ", "â”€", "â”Œ", "â”", "â”¬", "â””", "â”˜", "â”´", "â”‚", "â”œ", "â”¤", "â”¼", "â”", "â”", "â”“", "â”³", "â”—", "â”›", "â”»", "â”ƒ", "â”£", "â”«", "â•‹")) = 1 Then
                 isrep = True
         Else
                 isrep = False
@@ -220,3 +205,6 @@ End Function
 Function InsertCR()
         Call Char(CLng(13))
 End Function
+"""
+with codecs.open("template.vbs", "w", "cp932") as f:
+    f.write(template)

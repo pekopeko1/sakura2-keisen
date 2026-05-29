@@ -1,23 +1,7 @@
 ' draw arrow
 Option Explicit
 
-Dim linemode(1, 1, 1, 1)
-linemode(0, 0, 0, 0) = ""
-linemode(0, 0, 0, 1) = ""
-linemode(0, 0, 1, 0) = ""
-linemode(0, 0, 1, 1) = "„ª"
-linemode(0, 1, 0, 0) = ""
-linemode(0, 1, 0, 1) = "„¬"
-linemode(0, 1, 1, 0) = "„­"
-linemode(0, 1, 1, 1) = "„±"
-linemode(1, 0, 0, 0) = ""
-linemode(1, 0, 0, 1) = "„¯"
-linemode(1, 0, 1, 0) = "„®"
-linemode(1, 0, 1, 1) = "„³"
-linemode(1, 1, 0, 0) = "„«"
-linemode(1, 1, 0, 1) = "„°"
-linemode(1, 1, 1, 0) = "„²"
-linemode(1, 1, 1, 1) = "„´"
+{{LINEMODE_CODE}}
 
 Dim top_joint, bottom_joint, left_joint, right_joint
 top_joint    = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
@@ -25,12 +9,12 @@ bottom_joint = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§",
 left_joint   = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
 right_joint  = Array("„Ÿ", "„¡", "„¢", "„¦", "„¤", "„£", "„¨", "„ ", "„¥", "„§", "„©", "„ª", "„¬", "„­", "„±", "„¯", "„®", "„³", "„«", "„°", "„²", "„´")
 
-Call DrawLine("Bottom")
+Call DrawLine({{DIRECTION}})
 
 Sub DrawLine(direct)
         Dim ln
         Dim defchar
-        defchar = "„«"
+        defchar = {{DEFCHAR}}
 
         Select Case direct
         Case "Bottom": ln = CStr(linemode(IsStrMatch(GetTop, top_joint), 1, IsStrMatch(GetLeft, left_joint), IsStrMatch(GetRight, right_joint)))

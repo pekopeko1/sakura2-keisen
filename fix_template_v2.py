@@ -1,4 +1,6 @@
-﻿' draw arrow
+import codecs
+
+template = """' draw arrow
 Option Explicit
 
 {{LINEMODE_CODE}}
@@ -204,3 +206,8 @@ End Function
 Function InsertCR()
         Call Char(CLng(13))
 End Function
+"""
+
+# バイナリモードでUTF-8として書き出し、ツール側でSJISと認識させる
+with open("template.vbs", "w", encoding="utf-8-sig") as f:
+    f.write(template)

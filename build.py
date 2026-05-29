@@ -1,6 +1,6 @@
 import os
+import codecs
 
-# 罫線セットの定義
 LINE_SETS = {
     "thin": {
         "0,0,1,1": "─", "0,1,0,1": "┌", "0,1,1,0": "┐", "0,1,1,1": "┬",
@@ -14,7 +14,6 @@ LINE_SETS = {
     }
 }
 
-# デフォルト値
 DEFAULT_EMPTY = ""
 
 def generate_linemode_code(style):
@@ -36,8 +35,8 @@ def get_defchar(direction, style):
         return "┃" if direction in ["Top", "Bottom"] else "━"
 
 def build():
-    # テンプレートを読み込む (後ほど作成)
-    with open("template.vbs", "r", encoding="shift_jis") as f:
+    # encoding指定なし（デフォルトで環境依存）ではなく明示的にUTF-8-SIGなどを指定
+    with open("template.vbs", "r", encoding="utf-8-sig") as f:
         template = f.read()
 
     configs = [
@@ -55,12 +54,12 @@ def build():
         linemode_code = generate_linemode_code(style)
         defchar = get_defchar(direction, style)
         
-        # テンプレートのプレースホルダーを置換
         content = template.replace("{{LINEMODE_CODE}}", linemode_code)
         content = content.replace("{{DIRECTION}}", f'"{direction}"')
         content = content.replace("{{DEFCHAR}}", f'"{defchar}"')
         
-        with open(filename, "w", encoding="shift_jis") as f:
+        # 書き出しも明示的に Shift-JIS (cp932)
+        with open(filename, "w", encoding="cp932") as f:
             f.write(content)
         print(f"Generated {filename}")
 
